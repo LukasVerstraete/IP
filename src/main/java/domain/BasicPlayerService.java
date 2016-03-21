@@ -1,3 +1,7 @@
+package domain;
+
+import java.util.ArrayList;
+
 /**
  * Created by Lukas on 21-2-2016.
  */
@@ -5,9 +9,12 @@ public class BasicPlayerService implements PlayerService {
 
     private Database database;
 
-    public BasicPlayerService()
+    public BasicPlayerService(String databaseType)
     {
-        database = new LocalDatabase();
+        if(databaseType == "memory")
+            database = new LocalDatabase();
+        else
+            database = new LocalDatabase();
     }
 
     public void addPlayer(Player player) {
@@ -18,6 +25,11 @@ public class BasicPlayerService implements PlayerService {
         return database.getPlayer(username);
     }
 
+    public ArrayList<Player> getAllPlayers()
+    {
+        return database.getAllPlayers();
+    }
+    
     public Player createPlayer(String username, String name, String familyName) {
         return createPlayer(username, name, familyName);
     }

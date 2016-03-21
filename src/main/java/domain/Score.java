@@ -1,3 +1,5 @@
+package domain;
+
 /**
  * Created by Lukas on 9-2-2016.
  */

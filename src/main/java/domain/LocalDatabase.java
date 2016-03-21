@@ -1,3 +1,6 @@
+package domain;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -10,6 +13,7 @@ public class LocalDatabase implements Database {
     public LocalDatabase()
     {
         players = new HashMap<String, Player>();
+        addPlayer(new Player("lukas", "lukas", "verstraete"));
     }
 
     public void addPlayer(Player player)
@@ -29,6 +33,11 @@ public class LocalDatabase implements Database {
         return players.get(username);
     }
 
+    public ArrayList<Player> getAllPlayers()
+    {
+        return (ArrayList<Player>)players.values();
+    }
+    
     public void deletePlayer(String username) {
         players.remove(username);
     }

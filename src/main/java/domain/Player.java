@@ -1,5 +1,7 @@
 package domain;
 
+import util.DomainException;
+
 /**
  * Created by Lukas on 8-2-2016.
  */
@@ -9,6 +11,8 @@ public class Player {
     private String _name;
     private String _familyName;
     private Score _score;
+    
+    public Player() {}
 
     public Player(String username, String name, String familyName)
     {
@@ -32,8 +36,9 @@ public class Player {
         return _username;
     }
 
-    public void setUsername(String username) {
-        if(username == null) return;
+    public void setUsername(String username) throws DomainException {
+        if(username == null || username.isEmpty()) 
+            throw new DomainException("Please enter a valid username.");
         _username = username;
     }
 
@@ -42,7 +47,8 @@ public class Player {
     }
 
     public void setName(String name) {
-        if(name == null) return;
+        if(name == null)
+            throw new DomainException("Please enter a name for this player.");
         _name = name;
     }
 
@@ -51,7 +57,8 @@ public class Player {
     }
 
     public void setFamilyName(String familyName) {
-        if(familyName == null) return;
+        if(familyName == null) 
+            throw new DomainException("Please enter a family name for this player.");
         this._familyName = familyName;
     }
 

@@ -21,7 +21,8 @@ public class PlayerService implements Service<Player> {
             database = new LocalDatabase();
     }
 
-    public void add(Player player) {
+    public void add(Player player) throws ServiceException 
+    {
         try{
             database.addPlayer(player);
         } 
@@ -31,7 +32,8 @@ public class PlayerService implements Service<Player> {
         }
     }
 
-    public Player get(Object username) {
+    public Player get(Object username) throws ServiceException 
+    {
         try
         {
             return database.getPlayer((String)username);
@@ -42,7 +44,7 @@ public class PlayerService implements Service<Player> {
         }
     }
 
-    public ArrayList<Player> getAll()
+    public ArrayList<Player> getAll() throws ServiceException
     {
         try
         {
@@ -54,7 +56,8 @@ public class PlayerService implements Service<Player> {
         }
     }
 
-    public void update(Player player) {
+    public void update(Player player) throws ServiceException
+    {
         try{
             database.updatePlayer(player);
         } 
@@ -64,7 +67,8 @@ public class PlayerService implements Service<Player> {
         }
     }
 
-    public void delete(Player player) {
+    public void delete(Player player) throws ServiceException
+    {
         try{
             database.deletePlayer(player);
         } 

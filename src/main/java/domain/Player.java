@@ -1,11 +1,13 @@
 package domain;
 
+import java.io.Serializable;
 import util.DomainException;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by Lukas on 8-2-2016.
  */
-public class Player {
+public class Player implements Serializable {
 
     private String _username;
     private String _name;
@@ -36,6 +38,7 @@ public class Player {
         return _username;
     }
 
+    @NotEmpty
     public void setUsername(String username) throws DomainException {
         if(username == null || username.isEmpty()) 
             throw new DomainException("Please enter a valid username.");
@@ -46,8 +49,10 @@ public class Player {
         return _name;
     }
 
-    public void setName(String name) {
-        if(name == null)
+    @NotEmpty
+    public void setName(String name) throws DomainException 
+    {
+        if(name == null || name.isEmpty())
             throw new DomainException("Please enter a name for this player.");
         _name = name;
     }
@@ -56,8 +61,10 @@ public class Player {
         return _familyName;
     }
 
-    public void setFamilyName(String familyName) {
-        if(familyName == null) 
+    @NotEmpty
+    public void setFamilyName(String familyName) throws DomainException
+    {
+        if(familyName == null || familyName.isEmpty()) 
             throw new DomainException("Please enter a family name for this player.");
         this._familyName = familyName;
     }
@@ -79,6 +86,12 @@ public class Player {
     public Rank getRank()
     {
         return Rank.getRank(_score.getScore());
+    }
+    
+    @Override
+    public String toString()
+    {
+        return "Username: " + this._username + "\nName: " + this._name + "\nFamily name: " + this._familyName;
     }
 }
 

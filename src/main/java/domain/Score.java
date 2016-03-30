@@ -5,8 +5,8 @@ package domain;
  */
 public class Score {
 
-    private int _score;
-    private int _minutesPlayed;
+    private int score;
+    private int minutesPlayed;
 
     public Score()
     {
@@ -21,27 +21,27 @@ public class Score {
     public void setScore(int score)
     {
         if(score < 0) return;
-        _score = score;
+        this.score = score;
     }
 
     public int getScore()
     {
-        return _score;
+        return score;
     }
 
     public void setMinutesPlayed(int minutesPlayed)
     {
         if(minutesPlayed < 0) return;
-        _minutesPlayed = minutesPlayed;
+        this.minutesPlayed = minutesPlayed;
     }
 
     public int getMinutesPlayed()
     {
-        return _minutesPlayed;
+        return minutesPlayed;
     }
 
     public void addPoints(int amount)
     {
-        _score += amount;
+        score += amount;
     }
 }

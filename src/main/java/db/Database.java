@@ -7,12 +7,13 @@ import util.DatabaseException;
 /**
  * Created by Lukas on 8-2-2016.
  */
-public interface Database {
+public interface Database<E> {
 
-    public void addPlayer(Player player) throws DatabaseException;
-    public void updatePlayer(Player player) throws DatabaseException;
-    public Player getPlayer(String username) throws DatabaseException;
-    public ArrayList<Player> getAllPlayers() throws DatabaseException;
-    public void deletePlayer(Player player) throws DatabaseException;
+    public void add(E object) throws DatabaseException;
+    public void update(E object) throws DatabaseException;
+    public E get(Object id) throws DatabaseException;
+    public ArrayList<E> getAll() throws DatabaseException;
+    public void delete(E Object) throws DatabaseException;
+    public void closeConnection() throws DatabaseException;
 
 }

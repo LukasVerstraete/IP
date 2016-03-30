@@ -1,9 +1,12 @@
-package services;
+package services.player;
 
-import db.LocalDatabase;
+import db.player.LocalPlayerDatabase;
 import db.Database;
+import db.DatabaseFactory;
 import domain.Player;
 import java.util.ArrayList;
+import services.Service;
+import util.MemoryLocation;
 import util.ServiceException;
 
 /**
@@ -11,20 +14,18 @@ import util.ServiceException;
  */
 public class PlayerService implements Service<Player> {
 
-    private Database database;
+    private Database<Player> database;
 
-    public PlayerService(String databaseType)
+    public PlayerService(MemoryLocation location)
     {
-        if(databaseType.equals("memory"))
-            database = new LocalDatabase();
-        else
-            database = new LocalDatabase();
+        DatabaseFactory factory = new DatabaseFactory();
+        database = factory.getDatabase(location, Player.class);
     }
 
     public void add(Player player) throws ServiceException 
     {
         try{
-            database.addPlayer(player);
+            database.add(player);
         } 
         catch(Exception e)
         {
@@ -36,7 +37,7 @@ public class PlayerService implements Service<Player> {
     {
         try
         {
-            return database.getPlayer((String)username);
+            return database.get(username);
         }
         catch(Exception e)
         {
@@ -48,7 +49,7 @@ public class PlayerService implements Service<Player> {
     {
         try
         {
-            return database.getAllPlayers();
+            return database.getAll();
         }
         catch(Exception e)
         {
@@ -59,7 +60,7 @@ public class PlayerService implements Service<Player> {
     public void update(Player player) throws ServiceException
     {
         try{
-            database.updatePlayer(player);
+            database.update(player);
         } 
         catch(Exception e)
         {
@@ -70,7 +71,7 @@ public class PlayerService implements Service<Player> {
     public void delete(Player player) throws ServiceException
     {
         try{
-            database.deletePlayer(player);
+            database.delete(player);
         } 
         catch(Exception e)
         {

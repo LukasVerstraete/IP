@@ -10,30 +10,30 @@ public enum  Rank {
     BEGINNER("beginner", 601, 1000),
     MASTER("master", 1001, 2000);
 
-    private String _name;
-    private int _beginRange;
-    private int _endRange;
+    private String name;
+    private int beginRange;
+    private int endRange;
 
     Rank(String name, int beginRange, int endRange)
     {
-        _name = name;
-        _beginRange = beginRange;
-        _endRange = endRange;
+        this.name = name;
+        this.beginRange = beginRange;
+        this.endRange = endRange;
     }
 
     public String get_name()
     {
-        return _name;
+        return name;
     }
 
     public int get_beginRange()
     {
-        return _beginRange;
+        return beginRange;
     }
 
     public int get_endRange()
     {
-        return _endRange;
+        return endRange;
     }
 
     public static Rank getRank(int score)

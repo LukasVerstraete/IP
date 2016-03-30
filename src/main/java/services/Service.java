@@ -10,7 +10,7 @@ import util.ServiceException;
 public interface Service<E> {
 
     public void add(E object) throws ServiceException;
-    public Player get(Object id) throws ServiceException;
+    public E get(Object id) throws ServiceException;
     public ArrayList<E> getAll() throws ServiceException;
     public void update(E object) throws ServiceException;
     public void delete(E object) throws ServiceException;

@@ -6,7 +6,9 @@
 package db;
 
 import db.player.LocalPlayerDatabase;
+import db.player.RemotePlayerDatabase;
 import db.room.LocalRoomDatabase;
+import db.room.RemoteRoomDatabase;
 import domain.Player;
 import domain.Room;
 import util.DatabaseException;
@@ -21,8 +23,8 @@ public class DatabaseFactory {
         Database database = null;
         if(location == MemoryLocation.LOCAL)
             database = getLocalDatabase(type);
-//        if(location == MemoryLocation.REMOTE)
-//            database = getRemoteDatabase(type);
+        if(location == MemoryLocation.REMOTE)
+            database = getRemoteDatabase(type);
         return database;
     }
     
@@ -36,13 +38,13 @@ public class DatabaseFactory {
             throw new DatabaseException("Undefined database classtype: " + type.getSimpleName());
     }
     
-//    private Database getRemoteDatabase(Class type)
-//    {
-//        if(type.getCanonicalName().equals(Player.class.getCanonicalName()))
-//            return new RemotePlayerDatabase();
-//        else if(type.getCanonicalName().equals(Room.class.getCanonicalName()))
-//            return new RemoteRoomDatabase();
-//        else
-//            throw new DatabaseException("Undefined database classtype: " + type.getSimpleName());
-//    }
+    private Database getRemoteDatabase(Class type)
+    {
+        if(type.getCanonicalName().equals(Player.class.getCanonicalName()))
+            return new RemotePlayerDatabase("WiezenPU");
+        else if(type.getCanonicalName().equals(Room.class.getCanonicalName()))
+            return new RemoteRoomDatabase("WiezenPU");
+        else
+            throw new DatabaseException("Undefined database classtype: " + type.getSimpleName());
+    }
 }

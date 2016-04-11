@@ -78,4 +78,9 @@ public class PlayerService implements Service<Player> {
             throw new ServiceException(e.getMessage(), e);
         }
     }
+    
+    public void closeConnection() throws ServiceException
+    {
+        database.closeConnection();
+    }
 }

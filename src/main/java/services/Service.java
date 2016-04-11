@@ -14,5 +14,6 @@ public interface Service<E> {
     public ArrayList<E> getAll() throws ServiceException;
     public void update(E object) throws ServiceException;
     public void delete(E object) throws ServiceException;
+    public void closeConnection() throws ServiceException;
 
 }

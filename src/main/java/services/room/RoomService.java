@@ -85,4 +85,8 @@ public class RoomService implements Service<Room> {
         }
     }
     
+    public void closeConnection() throws ServiceException
+    {
+        database.closeConnection();
+    }
 }

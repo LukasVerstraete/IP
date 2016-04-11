@@ -18,9 +18,7 @@ public class Main {
 //    public static void main(String [] args)
 //    {
 //        PlayerService service = new PlayerService(MemoryLocation.REMOTE);
-//        Player player = new Player("Lukas", "Lukas", "Verstraete");
-//        service.add(player);
-//        Player p= service.get(player.getUsername());
+//        Player p= service.get("Lukas");
 //        System.out.println(p);
 //    }
     

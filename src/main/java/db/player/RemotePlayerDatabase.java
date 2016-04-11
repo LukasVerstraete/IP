@@ -88,7 +88,6 @@ public class RemotePlayerDatabase implements Database<Player> {
     public void closeConnection() throws DatabaseException {
         try
         {
-            
             entityManager.close();
             factory.close();
         }

@@ -5,14 +5,14 @@ import db.Database;
 import db.DatabaseFactory;
 import domain.Player;
 import java.util.ArrayList;
-import services.Service;
+import java.util.List;
 import util.MemoryLocation;
 import util.ServiceException;
 
 /**
  * Created by Lukas on 21-2-2016.
  */
-public class PlayerService implements Service<Player> {
+public class PlayerService {
 
     private Database<Player> database;
 
@@ -45,7 +45,7 @@ public class PlayerService implements Service<Player> {
         }
     }
 
-    public ArrayList<Player> getAll() throws ServiceException
+    public List<Player> getAll() throws ServiceException
     {
         try
         {

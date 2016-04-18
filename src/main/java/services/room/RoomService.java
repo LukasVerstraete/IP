@@ -4,11 +4,11 @@ import db.Database;
 import db.DatabaseFactory;
 import domain.Room;
 import java.util.ArrayList;
-import services.Service;
+import java.util.List;
 import util.MemoryLocation;
 import util.ServiceException;
 
-public class RoomService implements Service<Room> {
+public class RoomService {
 
     private Database<Room> database;
     
@@ -49,7 +49,7 @@ public class RoomService implements Service<Room> {
         }
     }
 
-    public ArrayList<Room> getAll() throws ServiceException 
+    public List<Room> getAll() throws ServiceException 
     {
         try 
         {

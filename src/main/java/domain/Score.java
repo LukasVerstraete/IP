@@ -1,9 +1,11 @@
 package domain;
 
+import java.io.Serializable;
+
 /**
  * Created by Lukas on 9-2-2016.
  */
-public class Score {
+public class Score implements Serializable{
 
     private int score;
     private int minutesPlayed;

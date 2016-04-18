@@ -1,9 +1,7 @@
 package domain;
 
 import java.io.Serializable;
-import javax.annotation.Generated;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import util.DomainException;
 
@@ -14,7 +12,7 @@ public class Player implements Serializable {
     private String username;
     private String name;
     private String familyName;
-    //private Score _score;
+    private Score score;
     
     public Player() {}
 
@@ -26,18 +24,18 @@ public class Player implements Serializable {
         setFamilyName(familyName);
     }
 
-//    public Player(String username, String name, String familyName, int score)
-//    {
-//        this(username, name, familyName, new Score(score));
-//    }
-//
-//    public Player(String username, String name, String familyName, Score score)
-//    {
-//        setUsername(username);
-//        setName(name);
-//        setFamilyName(familyName);
-//        setScore(score);
-//    }
+    public Player(String username, String name, String familyName, int score)
+    {
+        this(username, name, familyName, new Score(score));
+    }
+
+    public Player(String username, String name, String familyName, Score score)
+    {
+        setUsername(username);
+        setName(name);
+        setFamilyName(familyName);
+        setScore(score);
+    }
 
     public String getUsername() {
         return username;
@@ -71,24 +69,24 @@ public class Player implements Serializable {
         this.familyName = familyName;
     }
 
-//    public Score getScore() {
-//        return _score;
-//    }
-//
-//    public void setScore(Score score) {
-//        if(score == null) return;
-//        _score = score;
-//    }
-//
-//    public void setScore(int score)
-//    {
-//        _score.setScore(score);
-//    }
-//
-//    public Rank getRank()
-//    {
-//        return Rank.getRank(_score.getScore());
-//    }
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        if(score == null) return;
+        this.score = score;
+    }
+
+    public void setScore(int score)
+    {
+        this.score.setScore(score);
+    }
+
+    public Rank getRank()
+    {
+        return Rank.getRank(score.getScore());
+    }
     
     @Override
     public String toString()

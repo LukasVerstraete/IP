@@ -2,7 +2,9 @@ package db.player;
 
 import db.Database;
 import domain.Player;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import util.DatabaseException;
 
 /**
@@ -10,62 +12,52 @@ import util.DatabaseException;
  */
 public class LocalPlayerDatabase implements Database<Player> {
 
-    public ArrayList<Player> players;
+    public Map<String,Player> players;
 
     public LocalPlayerDatabase()
     {
-        players = new  ArrayList<Player>();
+        players = new  HashMap<String,Player>();
         add(new Player("lukas", "lukas", "verstraete"));
     }
 
     public void add(Player player) throws DatabaseException
     {
-        for(Player p : players)
-        {
-            if(p.getUsername().equals(player.getUsername()))
-                throw new DatabaseException("The player " + player + " already exists.");
-        }
-        if(player != null)
-            players.add(player);
+        if(player == null)
+            throw new DatabaseException("Cannot add NULL player");
+        if(players.get(player.getName()) != null)
+            throw new DatabaseException("This player already exists");
         else
-            throw new DatabaseException("Cannot add NULL player;");
+            players.put(player.getUsername(), player);
     }
 
     public void update(Player player) throws DatabaseException
     {
         if(player == null)
             throw new DatabaseException("Cannot update NULL player;");
-        for(int i = 0; i < players.size(); i++)
-        {
-            if(players.get(i).getUsername().equals(player.getUsername()))
-            {
-                players.set(i, player);
-                return;
-            }
-        }
-        throw new DatabaseException("There is no player with the username: " + player.getUsername());
+        if(players.get(player.getUsername()) == null)
+            throw new DatabaseException("There is no player with the username: " + player.getUsername());
+        else
+            players.put(player.getName(), player);
     }
 
     public Player get(Object username) throws DatabaseException
     {
         
-        for(Player player : players)
-        {
-            if(player.getUsername().equals((String)username))
-                return player;
-        }    
-        throw new DatabaseException("The player with username " + (String)username + " does not exist.");
+        if(players.get((String)username) == null)   
+            throw new DatabaseException("The player with username " + (String)username + " does not exist.");
+        else
+            return players.get((String)username);
     }
 
-    public ArrayList<Player> getAll() throws DatabaseException
+    public List<Player> getAll() throws DatabaseException
     {
-        return players;
+        return (List)players.values();
     }
     
     public void delete(Player player) throws DatabaseException
     {
         
-        players.remove(player);
+        players.remove(player.getUsername());
     }
 
     public void closeConnection() throws DatabaseException {

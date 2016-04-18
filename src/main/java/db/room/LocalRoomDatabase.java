@@ -4,65 +4,67 @@ import db.Database;
 import domain.Player;
 import domain.Room;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import util.DatabaseException;
 
 public class LocalRoomDatabase implements Database<Room> {
     
-    public ArrayList<Room> rooms;
+    public Map<String,Room> rooms;
     
     public LocalRoomDatabase()
     {
-        rooms = new ArrayList<Room>();
-        rooms.add(new Room("The green room"));
-        rooms.add(new Room("oval office", 20));
+        rooms = new HashMap<String,Room>();
+        rooms.put("The green room", new Room("The green room"));
+        rooms.put("oval office", new Room("oval office", 20));
     }
     
     public void add(Room room) throws DatabaseException 
     {
-        for(Room r : rooms)
-        {
-            if(r.getName().equals(room.getName()))
-                throw new DatabaseException("The room " + room.getName() + " already exists.");
-        }
-        if(room != null)
-            rooms.add(room);
+        if(room == null)
+            throw new DatabaseException("Cannot add NULL room");
+        if(rooms.get(room.getName()) != null)
+            throw new DatabaseException("This room already exists");
         else
-            throw new DatabaseException("Cannot add NULL room;");
+            rooms.put(room.getName(), room);
+//        for(Room r : rooms)
+//        {
+//            if(r.getName().equals(room.getName()))
+//                throw new DatabaseException("The room " + room.getName() + " already exists.");
+//        }
+//        if(room != null)
+//            rooms.add(room);
+//        else
+//            throw new DatabaseException("Cannot add NULL room;");
     }
 
     public void update(Room room) throws DatabaseException 
     {
         if(room == null)
             throw new DatabaseException("Cannot update NULL room;");
-        for(int i = 0; i < rooms.size(); i++)
-        {
-            if(rooms.get(i).getName().equals(room.getName()))
-            {
-                rooms.set(i, room);
-                return;
-            }
-        }
-        throw new DatabaseException("There is no room with the name: " + room.getName());
+        if(rooms.get(room.getName()) == null)
+            throw new DatabaseException("There is no room with the name: " + room.getName());
+        else
+            rooms.put(room.getName(), room);
     }
 
     public Room get(Object name) throws DatabaseException 
     {
-        for(Room room : rooms)
-        {
-            if(room.getName().equals((String)name))
-                return room;
-        }    
-        throw new DatabaseException("The room with name " + (String)name + " does not exist.");
+        if(rooms.get((String)name) == null)   
+            throw new DatabaseException("The room with name " + (String)name + " does not exist.");
+        else
+            return rooms.get((String)name);
     }
 
-    public ArrayList<Room> getAll() throws DatabaseException 
+    public List<Room> getAll() throws DatabaseException 
     {
-        return rooms;
+        return (List)rooms.values();
     }
 
     public void delete(Room room) throws DatabaseException 
     {
-        rooms.remove(room);
+        rooms.remove(room.getName());
     }
 
     public void closeConnection() throws DatabaseException {

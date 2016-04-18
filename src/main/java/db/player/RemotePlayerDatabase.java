@@ -3,6 +3,7 @@ package db.player;
 import db.Database;
 import domain.Player;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -59,7 +60,7 @@ public class RemotePlayerDatabase implements Database<Player> {
         }
     }
 
-    public ArrayList<Player> getAll() throws DatabaseException {
+    public List<Player> getAll() throws DatabaseException {
         try
         {
             Query query = entityManager.createQuery("select player from Player player");

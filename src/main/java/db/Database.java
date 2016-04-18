@@ -1,7 +1,6 @@
 package db;
 
-import domain.Player;
-import java.util.ArrayList;
+import java.util.List;
 import util.DatabaseException;
 
 /**
@@ -12,7 +11,7 @@ public interface Database<E> {
     public void add(E object) throws DatabaseException;
     public void update(E object) throws DatabaseException;
     public E get(Object id) throws DatabaseException;
-    public ArrayList<E> getAll() throws DatabaseException;
+    public List<E> getAll() throws DatabaseException;
     public void delete(E Object) throws DatabaseException;
     public void closeConnection() throws DatabaseException;
 

@@ -3,14 +3,17 @@ package domain;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import util.DomainException;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Player implements Serializable {
 
     @Id
+    @NotEmpty(message = "Please provide a username.")
     private String username;
+    @NotEmpty(message = "Please provide a name.")
     private String name;
+    @NotEmpty(message = "Please provide a family name.")
     private String familyName;
     private Score score;
     
@@ -40,10 +43,9 @@ public class Player implements Serializable {
     public String getUsername() {
         return username;
     }
-
-    public void setUsername(String username) throws DomainException {
-        if(username == null || username.isEmpty()) 
-            throw new DomainException("Please enter a valid username.");
+    
+    public void setUsername(String username)  
+    {
         this.username = username;
     }
 
@@ -51,10 +53,8 @@ public class Player implements Serializable {
         return name;
     }
 
-    public void setName(String name) throws DomainException 
+    public void setName(String name)  
     {
-        if(name == null || name.isEmpty())
-            throw new DomainException("Please enter a name for this player.");
         this.name = name;
     }
 
@@ -62,10 +62,8 @@ public class Player implements Serializable {
         return familyName;
     }
 
-    public void setFamilyName(String familyName) throws DomainException
+    public void setFamilyName(String familyName) 
     {
-        if(familyName == null || familyName.isEmpty()) 
-            throw new DomainException("Please enter a family name for this player.");
         this.familyName = familyName;
     }
 

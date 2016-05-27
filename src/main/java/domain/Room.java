@@ -3,6 +3,8 @@ package domain;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import util.DomainException;
 
 @Entity
@@ -11,7 +13,9 @@ public class Room implements Serializable {
     public static final int ROOM_CAPACITY = 4;
     
     @Id
+    @NotNull(message = "You must choose a name for the room")
     public String name;
+    @DecimalMin(value="0", message="This number must be 0 or higher.")
     public int gamesHosted;
     private boolean hosting;
     private Player[] players = new Player[ROOM_CAPACITY];
@@ -37,8 +41,6 @@ public class Room implements Serializable {
     
     public void setName(String name) throws DomainException
     {
-        if(name == null || name.isEmpty())
-            throw new DomainException("Please enter a room name.");
         this.name = name;
     }
     
@@ -49,8 +51,6 @@ public class Room implements Serializable {
     
     public void setGamesHosted(int amount) throws DomainException
     {
-        if(amount < 0)
-            throw new DomainException("The amount of hosted games can not be below 0.");
         gamesHosted = amount;
     }
     

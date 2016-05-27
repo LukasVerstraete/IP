@@ -24,10 +24,12 @@ public class RemoteRoomDatabase implements Database<Room> {
     public void add(Room room) throws DatabaseException {
         try
         {
-            entityManager.getTransaction().begin();
+            if(!entityManager.getTransaction().isActive())
+                entityManager.getTransaction().begin();
             entityManager.persist(room);
             entityManager.flush();
             entityManager.getTransaction().commit();
+            entityManager.clear();
         }
         catch(Exception e)
         {
@@ -38,10 +40,12 @@ public class RemoteRoomDatabase implements Database<Room> {
     public void update(Room room) throws DatabaseException {
         try
         {
-            entityManager.getTransaction().begin();
+            if(!entityManager.getTransaction().isActive())
+                entityManager.getTransaction().begin();
             entityManager.merge(room);
             entityManager.flush();
             entityManager.getTransaction().commit();
+            entityManager.clear();
         }
         catch(Exception e)
         {
@@ -75,10 +79,12 @@ public class RemoteRoomDatabase implements Database<Room> {
     public void delete(Room room) throws DatabaseException {
         try
         {
-            entityManager.getTransaction().begin();
+            if(!entityManager.getTransaction().isActive())
+                entityManager.getTransaction().begin();
             entityManager.remove(room);
             entityManager.flush();
             entityManager.getTransaction().commit();
+            entityManager.clear();
         }
         catch(Exception e)
         {

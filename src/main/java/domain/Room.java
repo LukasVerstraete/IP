@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 import util.DomainException;
 
 @Entity
@@ -13,7 +14,7 @@ public class Room implements Serializable {
     public static final int ROOM_CAPACITY = 4;
     
     @Id
-    @NotNull(message = "You must choose a name for the room")
+    @NotEmpty(message = "You must choose a name for the room")
     public String name;
     @DecimalMin(value="0", message="This number must be 0 or higher.")
     public int gamesHosted;

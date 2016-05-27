@@ -24,10 +24,12 @@ public class RemotePlayerDatabase implements Database<Player> {
     public void add(Player player) throws DatabaseException {
         try
         {
-            entityManager.getTransaction().begin();
+            if(!entityManager.getTransaction().isActive())
+                entityManager.getTransaction().begin();
             entityManager.persist(player);
             entityManager.flush();
             entityManager.getTransaction().commit();
+            entityManager.clear();
         }
         catch(Exception e)
         {
@@ -38,10 +40,12 @@ public class RemotePlayerDatabase implements Database<Player> {
     public void update(Player player) throws DatabaseException {
         try
         {
-            entityManager.getTransaction().begin();
+            if(!entityManager.getTransaction().isActive())
+                entityManager.getTransaction().begin();
             entityManager.merge(player);
             entityManager.flush();
             entityManager.getTransaction().commit();
+            entityManager.clear();
         }
         catch(Exception e)
         {
@@ -75,10 +79,12 @@ public class RemotePlayerDatabase implements Database<Player> {
     public void delete(Player player) throws DatabaseException {
         try
         {
-            entityManager.getTransaction().begin();
+            if(!entityManager.getTransaction().isActive())
+                entityManager.getTransaction().begin();
             entityManager.remove(player);
             entityManager.flush();
             entityManager.getTransaction().commit();
+            entityManager.clear();
         }
         catch(Exception e)
         {
